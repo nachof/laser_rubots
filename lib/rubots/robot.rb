@@ -3,16 +3,20 @@ require 'ostruct'
 module Rubots
   class Robot
     attr_reader :x, :y, :angle, :gun_angle
-    attr_writer :desired_angle, :desired_throttle
+    attr_writer :desired_angle, :desired_throttle, :desired_gun_angle
 
     # Some constants
-    MAX_ANGLE     = 360 # Maximum angle. Wraps around to zero after this.
-    ANGLE_STEP    = 1   # How much we change angle each tick.
+    MAX_ANGLE      = 360 # Maximum angle. Wraps around to zero after this.
+    ANGLE_STEP     = 1   # How much we change angle each tick.
 
-    MAX_THROTTLE  = 10  # Max throttle. Can't go above.
-    THROTTLE_STEP = 1   # How much we change throttle each tick.
+    MAX_THROTTLE   = 10  # Max throttle. Can't go above.
+    THROTTLE_STEP  = 1   # How much we change throttle each tick.
 
-    SPEED_FACTOR  = 1   # How much movement does each throttle step represent
+    SPEED_FACTOR   = 1   # How much movement does each throttle step represent
+
+    MAX_GUN_ANGLE  = 360 # Maximum gun angle. Wraps around to zero after this.
+    GUN_ANGLE_STEP = 2   # How much we change angle each tick.
+
 
 
     def initialize(strategy_class, x, y)
@@ -31,6 +35,7 @@ module Rubots
       tick_angle
       tick_throttle
       tick_movement
+      tick_gun
     end
 
   private
@@ -72,6 +77,21 @@ module Rubots
       mov_y = Math.cos(rad_angle) * movement * -1
       @x += mov_x
       @y += mov_y
+    end
+
+    def tick_gun
+      if @desired_gun_angle != @gun_angle
+        if (@desired_gun_angle - @gun_angle).abs < GUN_ANGLE_STEP
+          @gun_angle = @desired_gun_angle # Fractional angles
+        else
+          diff = @desired_gun_angle - @gun_angle
+          sign = diff / diff.abs
+          sign = sign * -1 if diff.abs > MAX_GUN_ANGLE / 2.0
+          @gun_angle += sign * GUN_ANGLE_STEP
+          @gun_angle += MAX_GUN_ANGLE if @gun_angle < 0
+          @gun_angle -= MAX_GUN_ANGLE if @gun_angle >= MAX_GUN_ANGLE
+        end
+      end
     end
   end
 end

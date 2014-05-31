@@ -15,6 +15,10 @@ module Rubots
       Command::RotateTo.new(angle)
     end
 
+    def rotate_gun_to(angle)
+      Command::RotateGunTo.new(angle)
+    end
+
     def throttle(throttle)
       Command::Throttle.new(throttle)
     end

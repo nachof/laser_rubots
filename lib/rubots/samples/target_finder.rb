@@ -18,8 +18,10 @@ module Rubots
           find_x(me)
         elsif @finding == :y
           find_y(me)
+        elsif me.angle != 0
+          rotate_to 0
         else
-          do_nothing
+          rotate_gun_to 180
         end
       end
 

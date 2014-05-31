@@ -1,6 +1,6 @@
 module Rubots
   class Strategy
-    def initialize(me, targets)
+    def initialize(map, me, targets)
     end
 
     # Command is called when we need to get a command from the robot.

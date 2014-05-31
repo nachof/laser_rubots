@@ -18,15 +18,15 @@ module Rubots
     GUN_ANGLE_STEP = 2   # How much we change angle each tick.
 
 
-
-    def initialize(strategy_class, x, y)
+    def initialize(strategy_class, game, x, y)
       @x = x
       @y = y
       @throttle  = @desired_throttle  = 0.0
       @angle     = @desired_angle     = 0.0
       @gun_angle = @desired_gun_angle = 0.0
+      @game = game
 
-      @strategy = strategy_class.new(robot_data, nil)
+      @strategy = strategy_class.new(@game.map, robot_data, nil)
     end
 
     def tick

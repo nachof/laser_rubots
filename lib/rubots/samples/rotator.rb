@@ -2,7 +2,7 @@ module Rubots
   module Samples
     # Rotates in place direction
     class Rotator < Strategy
-      def initialize(me, targets)
+      def initialize(map, me, targets)
         @direction = :left
       end
 

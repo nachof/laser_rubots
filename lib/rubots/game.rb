@@ -6,13 +6,17 @@ module Rubots
 
     def initialize
       #@robots = [Robot.new(Samples::Rotator, *random_location), Robot.new(Samples::SittingDuck, *random_location), Robot.new(Samples::TargetFinder, *random_location)]
-      @robots = [Robot.new(Samples::TargetFinder, *random_location)]
+      @robots = [Robot.new(Samples::TargetFinder, self, *random_location)]
     end
 
     def tick
       @robots.each do |robot|
         robot.tick
       end
+    end
+
+    def map
+      OpenStruct.new width: MAP_WIDTH, height: MAP_HEIGHT
     end
 
   private

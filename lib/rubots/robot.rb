@@ -30,7 +30,7 @@ module Rubots
     end
 
     def tick
-      command = @strategy.command(robot_data, nil)
+      command = @strategy.command(robot_data, targets_data)
       command.apply_to(self) if command
       tick_angle
       tick_throttle
@@ -46,6 +46,19 @@ module Rubots
 
     def robot_data
       OpenStruct.new x: @x, y: @y, angle: @angle, throttle: @throttle, gun_angle: @gun_angle
+    end
+
+    def targets_data
+      @game.robots.map do |target_robot|
+        next if target_robot == self
+        x_dist = @x - target_robot.x
+        y_dist = @y - target_robot.y
+        distance = Math.sqrt(x_dist ** 2 + y_dist ** 2)
+        actual_angle = Math.atan2(x_dist, -y_dist) * 180 / Math::PI + 180
+        relative_angle = (actual_angle - @angle) % 360
+
+        OpenStruct.new name: target_robot.name, distance: distance, angle: relative_angle
+      end.compact
     end
 
     def tick_angle

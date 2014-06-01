@@ -9,6 +9,7 @@ module Rubots
         Robot.new(Samples::Rotator,      self, *random_location),
         Robot.new(Samples::SittingDuck,  self, *random_location),
         Robot.new(Samples::TargetFinder, self, *random_location),
+        Robot.new(Samples::Artillery,    self, *random_location),
       ]
     end
 

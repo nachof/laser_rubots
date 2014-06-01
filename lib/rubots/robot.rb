@@ -38,8 +38,20 @@ module Rubots
       tick_gun
     end
 
+    # It's a separate method because we want fire to be after *every* robot moved
+    def tick_fire
+      if @firing
+        @game.laser_fire(self)
+        @firing = false
+      end
+    end
+
     def name
       @strategy.name
+    end
+
+    def do_fire
+      @firing = true
     end
 
   private

@@ -3,6 +3,7 @@ require 'rubots/graphics'
 require 'rubots/game'
 require 'rubots/robot'
 require 'rubots/command'
+require 'rubots/beam'
 require 'rubots/strategy'
 require 'rubots/samples'
 

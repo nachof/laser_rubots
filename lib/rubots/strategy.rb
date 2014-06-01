@@ -27,6 +27,10 @@ module Rubots
       Command::Throttle.new(throttle)
     end
 
+    def fire
+      Command::Fire.new
+    end
+
     def do_nothing
       nil
     end

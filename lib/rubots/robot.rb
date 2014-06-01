@@ -27,9 +27,13 @@ module Rubots
       @game = game
 
       @strategy = strategy_class.new(@game.map, robot_data, nil)
+
+      @destroyed = false
     end
 
     def tick
+      return if @destroyed
+
       command = @strategy.command(robot_data, targets_data)
       command.apply_to(self) if command
       tick_angle
@@ -52,6 +56,21 @@ module Rubots
 
     def do_fire
       @firing = true
+    end
+
+    def distance_to(other)
+      x_dist = @x - other.x
+      y_dist = @y - other.y
+      Math.sqrt(x_dist ** 2 + y_dist ** 2)
+    end
+
+    def destroy
+      @throttle = 0
+      @destroyed = true
+    end
+
+    def destroyed?
+      @destroyed
     end
 
   private

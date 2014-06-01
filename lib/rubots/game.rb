@@ -5,8 +5,11 @@ module Rubots
     MAP_WIDTH  = 1000
 
     def initialize
-      #@robots = [Robot.new(Samples::Rotator, *random_location), Robot.new(Samples::SittingDuck, *random_location), Robot.new(Samples::TargetFinder, *random_location)]
-      @robots = [Robot.new(Samples::TargetFinder, self, *random_location)]
+      @robots = [
+        Robot.new(Samples::Rotator,      self, *random_location),
+        Robot.new(Samples::SittingDuck,  self, *random_location),
+        Robot.new(Samples::TargetFinder, self, *random_location),
+      ]
     end
 
     def tick

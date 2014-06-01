@@ -15,6 +15,10 @@ module Rubots
           rotate_to 89
         end
       end
+
+      def name
+        "Rotator"
+      end
     end
   end
 end

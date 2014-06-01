@@ -38,6 +38,10 @@ module Rubots
       tick_gun
     end
 
+    def name
+      @strategy.name
+    end
+
   private
 
     def robot_data

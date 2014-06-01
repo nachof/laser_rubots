@@ -26,6 +26,10 @@ module Rubots
         end
       end
 
+      def name
+        "GoToCenter"
+      end
+
       def find_x(me)
         if me.x > @find_x && me.angle != ANGLE_LEFT
           rotate_to ANGLE_LEFT

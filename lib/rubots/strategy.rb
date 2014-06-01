@@ -9,6 +9,10 @@ module Rubots
       # Implement in subclass
     end
 
+    def name
+      "Unnamed robot"
+    end
+
     protected
 
     def rotate_to(angle)

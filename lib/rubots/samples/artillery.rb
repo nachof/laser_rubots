@@ -7,7 +7,9 @@ module Rubots
       end
 
       def command(me, targets)
-        if me.gun_angle != targets.first.angle
+        if me.angle != 90
+          rotate_to 90
+        elsif me.gun_angle != targets.first.angle
           rotate_gun_to targets.first.angle
         else
           unless @fired

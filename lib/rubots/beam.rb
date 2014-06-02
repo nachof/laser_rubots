@@ -7,5 +7,10 @@ module Rubots
       @source_y = source_y
       @angle = angle
     end
+
+    def self.from(robot)
+      real_angle = (robot.angle + robot.gun_angle) % 360
+      new robot.x, robot.y, real_angle
+    end
   end
 end

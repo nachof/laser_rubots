@@ -26,8 +26,8 @@ module Rubots
       OpenStruct.new width: MAP_WIDTH, height: MAP_HEIGHT
     end
 
-    def laser_fire(source_robot)
-      @laser_beams << Beam.new(source_robot.x, source_robot.y, source_robot.gun_angle)
+    def laser_fire(beam)
+      @laser_beams << beam
     end
 
   private

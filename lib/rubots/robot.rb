@@ -45,7 +45,7 @@ module Rubots
     # It's a separate method because we want fire to be after *every* robot moved
     def tick_fire
       if @firing
-        @game.laser_fire(self)
+        @game.laser_fire(Beam.from(self))
         @firing = false
       end
     end

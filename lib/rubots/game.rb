@@ -50,7 +50,9 @@ module Rubots
     end
 
     def check_beam_hits
-      # TODO
+      @laser_beams.each do |beam|
+        @robots.each { |robot| beam.check_hit robot }
+      end
     end
 
     def clean_up_bodies

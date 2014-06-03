@@ -27,7 +27,13 @@ module Rubots
     def found_hit?(robot)
       return false if robot.x == @source_x && robot.y == @source_y # Avoid hitting self
 
-      tan_angle = Math.tan(angle * Math::PI / 180)
+      # Check we're pointing to the right quadrant
+      return false if robot.x > @source_x && (@angle > 190 && @angle < 350)
+      return false if robot.x < @source_x && (@angle < 170 && @angle >  10)
+      return false if robot.y > @source_y && (@angle > 280 || @angle <  80)
+      return false if robot.y < @source_y && (@angle < 260 && @angle > 100)
+
+      tan_angle = Math.tan(@angle * Math::PI / 180)
 
       test_x = tan_angle * (@source_y - robot.y) + @source_x
       return true if (test_x - robot.x).abs < HIT_THRESHOLD

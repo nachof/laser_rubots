@@ -4,13 +4,8 @@ module Rubots
     MAP_HEIGHT = 700
     MAP_WIDTH  = 1000
 
-    def initialize
-      @robots = [
-        Robot.new(Samples::Rotator,      self, *random_location),
-        Robot.new(Samples::SittingDuck,  self, *random_location),
-        Robot.new(Samples::TargetFinder, self, *random_location),
-        Robot.new(Samples::Artillery,    self, *random_location),
-      ]
+    def initialize(robots)
+      @robots = robots.map { |klass| Robot.new(klass, self, *random_location) }
     end
 
     def tick

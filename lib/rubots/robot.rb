@@ -34,8 +34,8 @@ module Rubots
     def tick
       return if @destroyed
 
-      command = @strategy.command(robot_data, targets_data)
-      command.apply_to(self) if command
+      command = @strategy.get_command(robot_data, targets_data)
+      command.apply_to(self)
       tick_angle
       tick_throttle
       tick_movement

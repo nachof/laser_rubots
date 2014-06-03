@@ -3,8 +3,14 @@ module Rubots
     def initialize(map, me, targets)
     end
 
-    # Command is called when we need to get a command from the robot.
-    # It should return a Command. We'll provide helper methods for that.
+    # Called by the Robot to get a command
+    def get_command(me, targets)
+      @command_queue ||= []
+      command(me, targets) if @command_queue.empty?
+      @command_queue.shift || Command::DoNothing.new
+    end
+
+    # When get_command is out of commands, it calls this, which will queue commands
     def command(me, targets)
       # Implement in subclass
     end
@@ -16,23 +22,23 @@ module Rubots
     protected
 
     def rotate_to(angle)
-      Command::RotateTo.new(angle)
+      @command_queue << Command::RotateTo.new(angle)
     end
 
     def rotate_gun_to(angle)
-      Command::RotateGunTo.new(angle)
+      @command_queue << Command::RotateGunTo.new(angle)
     end
 
     def throttle(throttle)
-      Command::Throttle.new(throttle)
+      @command_queue << Command::Throttle.new(throttle)
     end
 
     def fire
-      Command::Fire.new
+      @command_queue << Command::Fire.new
     end
 
     def do_nothing
-      nil
+      @command_queue << Command::DoNothing.new
     end
   end
 end

@@ -12,12 +12,7 @@ module Rubots
         elsif me.gun_angle != targets.first.angle
           rotate_gun_to targets.first.angle
         else
-          unless @fired
-            @fired = true
-            fire
-          else
-            do_nothing
-          end
+          fire
         end
       end
 

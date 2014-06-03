@@ -1,6 +1,6 @@
 module Rubots
   module Command
-    class DoNothing
+    class DoNothing < Base
       def apply_to(robot)
         # Nothing
       end

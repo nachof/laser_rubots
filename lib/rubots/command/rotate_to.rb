@@ -1,6 +1,6 @@
 module Rubots
   module Command
-    class RotateTo
+    class RotateTo < Base
       def initialize(angle)
         @angle = angle % Robot::MAX_ANGLE
       end

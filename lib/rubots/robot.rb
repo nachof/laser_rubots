@@ -29,13 +29,20 @@ module Rubots
       @strategy = strategy_class.new(@game.map, robot_data, nil)
 
       @destroyed = false
+
+      @cooldown_timer = 0
     end
 
     def tick
       return if @destroyed
 
-      command = @strategy.get_command(robot_data, targets_data)
-      command.apply_to(self)
+      if @cooldown_timer > 0
+        @cooldown_timer -= 1
+      else
+        command = @strategy.get_command(robot_data, targets_data)
+        command.apply_to(self)
+        @cooldown_timer = command.cooldown
+      end
       tick_angle
       tick_throttle
       tick_movement

@@ -10,6 +10,10 @@ module Rubots
       def apply_to(robot)
         robot.desired_throttle = @throttle
       end
+
+      def cooldown
+        5
+      end
     end
   end
 end

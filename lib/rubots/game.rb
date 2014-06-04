@@ -13,6 +13,7 @@ module Rubots
       @robots.each { |robot| robot.tick      }
       @robots.each { |robot| robot.tick_fire }
       check_collisions
+      check_out_of_area
       check_beam_hits
       clean_up_bodies
     end
@@ -60,6 +61,15 @@ module Rubots
     def check_beam_hits
       @laser_beams.each do |beam|
         @robots.each { |robot| beam.check_hit robot }
+      end
+    end
+
+    def check_out_of_area
+      @robots.each do |r|
+        if r.x > MAP_WIDTH || r.y > MAP_HEIGHT || r.x < 0 || r.y < 0
+          r.destroy
+          puts "#{r.name} hit the invisible wall and was destroyed"
+        end
       end
     end
 

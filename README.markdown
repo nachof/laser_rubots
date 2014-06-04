@@ -119,6 +119,14 @@ The second parameter will be an array with information about the other robots in
     targets.first.distance # How far away from you it is.
     targets.first.angle    # In which direction, relative to you (0 is straight ahead)
 
+## Winning the game
+
+The game is won by the last robot left alive.
+
+There's three main ways a robot can die: by colliding with another robot, by hitting the invisible wall surrounding the map area, or by being hit with a laser.
+
+Once only one robot is left, he's declared the winner, and the game pauses for a moment to let you see the end result. If no survivors are left, then nobody wins.
+
 ## License and sources
 
 You can use and modify this code all you want. See the LICENSE file for details, but it's the MIT license, so you probably already know how it works.

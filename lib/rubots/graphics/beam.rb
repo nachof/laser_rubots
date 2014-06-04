@@ -8,7 +8,7 @@ module Rubots
         @beam = beam
         @duration = BEAM_DURATION
         @window = window
-        @pew = Gosu::Sample.new(window, "media/pew.wav")
+        @pew = Gosu::Sample.new(window, Assets::PEW_SOUND)
         @pew.play
       end
 

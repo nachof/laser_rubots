@@ -5,9 +5,9 @@ module Rubots
 
       def initialize(window, robot)
         @robot = robot
-        @image      = Gosu::Image.new(window, "media/robot.png", false)
-        @gun_image  = Gosu::Image.new(window, "media/gun.png", false)
-        @dead_image = Gosu::Image.new(window, "media/deadbot.png", false)
+        @image      = Gosu::Image.new(window, Assets::ROBOT_IMG, false)
+        @gun_image  = Gosu::Image.new(window, Assets::GUN_IMG, false)
+        @dead_image = Gosu::Image.new(window, Assets::DEAD_IMG, false)
         @font       = Gosu::Font.new(window, Gosu::default_font_name, 14)
       end
 

@@ -8,6 +8,8 @@ module Rubots
         @beam = beam
         @duration = BEAM_DURATION
         @window = window
+        @pew = Gosu::Sample.new(window, "media/pew.wav")
+        @pew.play
       end
 
       def decay

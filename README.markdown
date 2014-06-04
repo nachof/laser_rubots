@@ -4,6 +4,10 @@
 
 Laser Rubots is a small game where you program a robot to do battle with other robots, armed with red lasers.
 
+## How do I install it?
+
+    gem install rubots
+
 ## How does it work?
 
 You need to create a class that inherits from Rubots::Strategy and implements the command method. Once you have that, save it in a file that matches the name of the class. For example, if your class is called Test, save it in test.rb

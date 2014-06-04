@@ -25,6 +25,16 @@ module Rubots
       @laser_beams << beam
     end
 
+    def over?
+      @robots.count <= 1
+    end
+
+    def winner
+      return nil unless over?
+
+      @robots.first || OpenStruct.new(name: "Nobody")
+    end
+
   private
 
     # TODO enforce separation

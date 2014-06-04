@@ -9,10 +9,22 @@ module Rubots
         @beams = []
       end
 
+      GAME_END_TICKS = 150
       def update
-        @game.tick
-        @beams += @game.laser_beams.map { |b| Beam.new self, b }
-        decay_beams
+        if !@game_over
+          @game.tick
+          @beams += @game.laser_beams.map { |b| Beam.new self, b }
+          decay_beams
+          @game_over = @game.over?
+        else
+          @game_over_countdown ||= GAME_END_TICKS
+          @game_over_countdown -= 1
+          if @game_over_countdown == 0
+            puts "#{@game.winner.name} wins the game."
+            exit
+          end
+        end
+
       end
 
       def draw

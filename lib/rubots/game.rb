@@ -49,7 +49,10 @@ module Rubots
       @robots.each do |r1|
         @robots.each do |r2|
           next if r1 == r2
-          r1.destroy if r1.distance_to(r2) < COLLISION_DISTANCE
+          if r1.distance_to(r2) < COLLISION_DISTANCE
+            r1.destroy
+            puts "#{r1.name} destroyed by collision with #{r2.name}"
+          end
         end
       end
     end

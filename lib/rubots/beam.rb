@@ -14,7 +14,10 @@ module Rubots
     end
 
     def check_hit(robot)
-      robot.destroy if found_hit?(robot)
+      if found_hit?(robot)
+        robot.destroy
+        puts "#{robot.name} hit by laser"
+      end
     end
 
     # Laser beam is:

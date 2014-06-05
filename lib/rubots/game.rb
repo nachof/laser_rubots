@@ -3,6 +3,7 @@ module Rubots
     attr_reader :robots, :laser_beams
     MAP_HEIGHT = 700
     MAP_WIDTH  = 1000
+    CELL_SIZE  = 40 # Positioning cell
 
     def initialize(robots)
       @robots = robots.map { |klass| Robot.new(klass, self, *random_location) }
@@ -38,11 +39,15 @@ module Rubots
 
   private
 
-    # TODO enforce separation
     def random_location
-      x = rand(MAP_WIDTH)
-      y = rand(MAP_HEIGHT)
-      [x, y]
+      x_cells = MAP_WIDTH  / CELL_SIZE
+      y_cells = MAP_HEIGHT / CELL_SIZE
+      @taken ||= []
+      begin
+        pair = [rand(x_cells), rand(y_cells)]
+      end while puts("coll") || @taken.include?(pair)
+      @taken << pair
+      pair.map { |coord| coord * CELL_SIZE + CELL_SIZE / 2 }
     end
 
     COLLISION_DISTANCE = 32

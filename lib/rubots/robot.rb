@@ -33,7 +33,7 @@ module Rubots
       @cooldown_timer = 0
     end
 
-    def tick
+    def process_command
       return if @destroyed
 
       if @cooldown_timer > 0
@@ -43,18 +43,16 @@ module Rubots
         command.apply_to(self)
         @cooldown_timer = command.cooldown
       end
+    end
+
+    def tick
+      return if @destroyed
+
       tick_angle
       tick_throttle
       tick_movement
       tick_gun
-    end
-
-    # It's a separate method because we want fire to be after *every* robot moved
-    def tick_fire
-      if @firing
-        @game.laser_fire(Beam.from(self))
-        @firing = false
-      end
+      tick_fire
     end
 
     def name
@@ -146,6 +144,13 @@ module Rubots
           @gun_angle += MAX_GUN_ANGLE if @gun_angle < 0
           @gun_angle -= MAX_GUN_ANGLE if @gun_angle >= MAX_GUN_ANGLE
         end
+      end
+    end
+
+    def tick_fire
+      if @firing
+        @game.laser_fire(Beam.from(self))
+        @firing = false
       end
     end
   end

@@ -10,8 +10,8 @@ module Rubots
 
     def tick
       @laser_beams = []
-      @robots.each { |robot| robot.tick      }
-      @robots.each { |robot| robot.tick_fire }
+      @robots.each { |robot| robot.process_command }
+      @robots.each { |robot| robot.tick            }
       check_collisions
       check_out_of_area
       check_beam_hits

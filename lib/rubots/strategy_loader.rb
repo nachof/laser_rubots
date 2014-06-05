@@ -3,7 +3,7 @@ module Rubots
     def self.load(params)
       return default_lineup unless params.any?
 
-      params.map { |p| new(p).strategy_class }
+      params.map { |p| new(p).strategy_class }.flatten
     end
 
     def self.default_lineup
@@ -16,7 +16,9 @@ module Rubots
     end
 
     def strategy_class
-      if is_sample?
+      if is_multiple?
+        multiple_classes
+      elsif is_sample?
         sample_class
       else
         class_from_file
@@ -24,6 +26,15 @@ module Rubots
     end
 
   private
+
+    def is_multiple?
+      @name.match(/^[0-9]+\*/)
+    end
+
+    def multiple_classes
+      parts = @name.split('*', 2)
+      [StrategyLoader.new(parts[1]).strategy_class] * parts[0].to_i
+    end
 
     def class_from_file
       load @name

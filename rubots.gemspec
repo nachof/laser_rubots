@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'rubots'
-  s.version     = '0.2'
+  s.version     = '0.2.1'
   s.date        = '2014-06-05'
   s.summary     = "Laser Rubots!"
   s.description = "A small simple game where you program robots to fight to the death using red lasers"

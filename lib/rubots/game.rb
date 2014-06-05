@@ -45,7 +45,7 @@ module Rubots
       @taken ||= []
       begin
         pair = [rand(x_cells), rand(y_cells)]
-      end while puts("coll") || @taken.include?(pair)
+      end while @taken.include?(pair)
       @taken << pair
       pair.map { |coord| coord * CELL_SIZE + CELL_SIZE / 2 }
     end

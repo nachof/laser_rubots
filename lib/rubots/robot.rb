@@ -85,7 +85,10 @@ module Rubots
     end
 
     def targets_data
-      @game.robots.map do |target_robot|
+      robots_arrays = @game.robots.slice_before(self).to_a
+      robots_arrays.last.shift # First is self
+      robots = robots_arrays.reverse.inject(&:+)
+      robots.map do |target_robot|
         next if target_robot == self
         x_dist = @x - target_robot.x
         y_dist = @y - target_robot.y

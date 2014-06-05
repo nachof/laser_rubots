@@ -131,6 +131,33 @@ There's three main ways a robot can die: by colliding with another robot, by hit
 
 Once only one robot is left, he's declared the winner, and the game pauses for a moment to let you see the end result. If no survivors are left, then nobody wins.
 
+## Loading robots
+
+You can load any number of robots, but it's probably not wise to do it with numbers over 10.
+
+To specify a robot, you can pass the file as a parameter to the rubots command. To do that, just write:
+
+    rubots filename1.rb filename2.rb ...
+
+The Strategy class name must match the file name. So if your class is DeathToAllHumans, you should save it in a file called death\_to\_all\_humans.rb.
+
+If you want, you can try the few included samples. They don't do much, but they can serve as target practice. You should be able to beat them easily. The included samples are:
+
+    sitting_duck  # Stays in place, waiting to be shot
+    rotator       # Rotates 90 degrees right, then left, then right, and so on
+    target_finder # Attempts to move to the center of the map. Doesn't work well.
+    artillery     # Rotates 90 degrees right, then aims and fires at targets.
+
+To load a sample, specify it as sample:name. For example:
+
+    rubots sample:artillery sample:sitting_duck
+
+If you want multiple copies of a single robot, you can use the n\*robotname format:
+
+    rubots 5*sample:artillery 3*test_bot.rb
+
+That will load five artillery sample robots, and 3 TestBot robots from the test\_bot.rb file.
+
 ## License and sources
 
 You can use and modify this code all you want. See the LICENSE file for details, but it's the MIT license, so you probably already know how it works.
